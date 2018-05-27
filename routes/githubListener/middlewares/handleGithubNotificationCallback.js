@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
             await MailerInterface.notifyIssue({
                 to,
                 subject : `issue ${action}!`,
-                html : `<p>Hi, ${userLogin}, issue was ${action} in <a href=${repositoryURL}>${repositoryName}repo</a>, click <a href=${issueURL}> here</a> to fast access</p>`
+                html : `<p>Hi, ${userLogin}, issue was ${action} in <a href=${repositoryURL}>${repositoryName}</a> repo, click <a href=${issueURL}> here</a> to fast access</p>`
             });
         }
         res.send(req.body)
