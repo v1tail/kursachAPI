@@ -21,13 +21,13 @@ module.exports = async (req, res, next) => {
                 }
             } = repository;
             const {
-                url: issueURL
+                html_url: issueURL
             } = issue;
             const {email: to} = await UserInterface.findUser({userLogin});
             await MailerInterface.notifyIssue({
                 to,
                 subject : `issue ${action}!`,
-                html : `<p>Hi, ${userLogin}, issue was ${action} in <a href=${repositoryURL}>${repositoryName} repo</a>, click <a href=${issueURL}>here</a> to fast access</p>`
+                html : `<p>Hi, ${userLogin}, issue was ${action} in <a href=${repositoryURL}>${repositoryName}repo</a>, click <a href=${issueURL}> here</a> to fast access</p>`
             });
         }
         res.send(req.body)
