@@ -24,12 +24,21 @@ class GitHubAdapter {
         }).then(res => res.json())
     }
 
-    static async postForGitHub(url, options, credentials) {
-
+    static async postForGitHub(url, body, credentials) {
+        const headers = {'Content-Type': 'application/json'};
+        if (credentials) {
+            headers.Authorization = this.getBasicAuthHeader({credentials});
+        }
+        const finalUrl = options ? url + qs.stringify(options) : url;
+        return fetch(finalUrl, {
+            method: 'POST',
+            body,
+            headers,
+        }).then(res => res.json())
     }
 
     static async putGitHubApi(url, options, credentials) {
-
+        // TODO
     }
 
     static async handleRequest({url, method, options, credentials}) {

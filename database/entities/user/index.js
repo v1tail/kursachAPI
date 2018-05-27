@@ -17,12 +17,13 @@ class UserInterface {
         });
     }
 
-    static async createUser({userEmail, userLogin}) {
+    static async createUser({userEmail, userLogin,repositories}) {
         const lastLoggedIn = new Date();
         const userObj = {
             login: userLogin,
             email: userEmail,
-            lastLoggedIn
+            lastLoggedIn,
+            repositories
         };
         return Model.create(userObj);
     }

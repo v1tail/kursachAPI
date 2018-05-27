@@ -6,4 +6,7 @@ router.post(
     '/',
     require('../middlewares/handleGithubNotificationCallback'),
 );
+
+
+router.post('/set/:uId',)
 module.exports = router;
