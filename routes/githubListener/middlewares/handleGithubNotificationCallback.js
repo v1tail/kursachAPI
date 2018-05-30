@@ -16,9 +16,9 @@ module.exports = async (req, res, next) => {
             const {
                 name: repositoryName,
                 html_url: repositoryURL,
-                avatar_url,
                 owner: {
-                    login: userLogin
+                    login: userLogin,
+                    avatar_url
                 }
             } = repository;
             const {
@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
             await MailerInterface.notifyIssue({
                 to,
                 subject : `issue ${action}!`,
-                html : `<div style="text-align:center;background-image:url(https://cs.pikabu.ru/post_img/big/2013/11/18/8/1384775795_1026843613.jpg); left: 0; right : 0; color : black; "><h3>Dear ${userLogin},<img align="right" scr=${avatar_url}></h3><h4>You receive this email due to the subscribing for issues in <a href=${repositoryURL}>${repositoryName}</a> repository</h4><h4>We\`re glad to notify you, that issue was ${action} in <a href=${repositoryURL}>${repositoryName}</a> repository</h4><br><h4>click <a href=${issueURL}> here</a> to fast access</h4></div>`
+                html : `<div style="text-align:center; background-image:url(https://cs.pikabu.ru/post_img/big/2013/11/18/8/1384775795_1026843613.jpg); left: 0; right : 0; color : black; "><h3>Dear ${userLogin},</h3><img style="width: 90px;height:90px;" src=${avatar_url}><h4>You receive this email due to the subscribing for issues in <a href=${repositoryURL}>${repositoryName}</a> repository</h4><h4>We\`re glad to notify you, that issue was ${action} in <a href=${repositoryURL}>${repositoryName}</a> repository</h4><br><h4>click <a href=${issueURL}> here</a> to fast access</h4></div>`
             });
         }
         res.send(req.body)
